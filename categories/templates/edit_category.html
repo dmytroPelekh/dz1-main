@@ -1,0 +1,7 @@
+<h1>Редагувати категорію: {{ category.name }}</h1>
+<form method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Оновити</button>
+</form>
+<a href="{% url 'category_list' %}">Назад</a>

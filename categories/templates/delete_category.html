@@ -1,0 +1,6 @@
+<h1>Видалити категорію "{{ category.name }}"?</h1>
+<form method="POST">
+  {% csrf_token %}
+  <button type="submit">Так, видалити</button>
+</form>
+<a href="{% url 'category_list' %}">Скасувати</a>
