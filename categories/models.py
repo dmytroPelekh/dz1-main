@@ -16,18 +16,22 @@ class Category(models.Model):
 
     def save(self, *args, **kwargs):
         if self.image:
-            if self.pk:
+            if self.pk:  # об'єкт уже існує
                 old = type(self).objects.filter(pk=self.pk).first()
                 if old and old.image and old.image != self.image:
                     old.image.delete(save=False)
+
             img = Image.open(self.image)
+
             if img.mode in ("RGBA", "P"):
                 img = img.convert("RGB")
 
             filename = f"{uuid.uuid4().hex}.webp"
+
             buffer = BytesIO()
             img.save(buffer, format='WEBP')
             buffer.seek(0)
+
             self.image.save(filename, ContentFile(buffer.read()), save=False)
 
         if not self.slug:
@@ -40,5 +44,7 @@ class Category(models.Model):
             self.slug = slug
 
         super().save(*args, **kwargs)
+
+    # String representation of the model
     def __str__(self):
         return self.name

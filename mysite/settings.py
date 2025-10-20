@@ -34,8 +34,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # 'categories',
-    'categories.apps.CategoriesConfig',
-    'users.apps.UsersConfig',
+    'categories.apps.CategoriesConfig', # додаємо наш додаток categories
+    'users.apps.UsersConfig', # додаємо наш додаток users
     'products.apps.ProductsConfig', 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -119,20 +119,23 @@ USE_I18N = True
 
 USE_TZ = True
 
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.2/howto/static-files/
+
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
     str(BASE_DIR / 'static'),
 ]
 
-IMAGES_URL = "/images/"
+IMAGES_URL = '/images/'
 
 IMAGES_ROOT = BASE_DIR / 'images'
 
+AUTH_USER_MODEL = 'users.CustomUser'
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
-
-LOGIN_REDIRECT_URL = 'homepage'
-LOGOUT_REDIRECT_URL = 'homepage'
