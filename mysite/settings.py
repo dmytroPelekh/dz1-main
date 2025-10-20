@@ -129,9 +129,9 @@ STATICFILES_DIRS = [
     str(BASE_DIR / 'static'),
 ]
 
-IMAGES_URL = '/images/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
-IMAGES_ROOT = BASE_DIR / 'images'
 
 AUTH_USER_MODEL = 'users.CustomUser'
 

@@ -44,7 +44,5 @@ class Category(models.Model):
             self.slug = slug
 
         super().save(*args, **kwargs)
-
-    # String representation of the model
     def __str__(self):
         return self.name
