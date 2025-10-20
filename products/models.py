@@ -26,7 +26,7 @@ class Product(models.Model):
             self.slug = slug
 
         super().save(*args, **kwargs)
-n  
+
     def __str__(self):
         return f"{self.name} ({self.category.name})"
 
