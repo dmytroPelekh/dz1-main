@@ -33,9 +33,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # 'categories',
-    'categories.apps.CategoriesConfig', # додаємо наш додаток categories
-    'users.apps.UsersConfig', # додаємо наш додаток users
+    'categories.apps.CategoriesConfig',
+    'users.apps.UsersConfig',
     'products.apps.ProductsConfig', 
     'django.contrib.admin',
     'django.contrib.auth',

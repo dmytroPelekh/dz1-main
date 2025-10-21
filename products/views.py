@@ -8,6 +8,8 @@ import uuid
 from io import BytesIO
 from django.core.files.base import ContentFile
 from PIL import Image
+from django.contrib import messages
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 def show_products(request):
@@ -71,22 +73,6 @@ def delete_temp_image(request):
         return JsonResponse({"error": "No file_id provided"}, status=400)
     return JsonResponse({"error": "Invalid request"}, status=400)
 
-def delete_product(request, product_id):
-    try:
-        product = Product.objects.get(id=product_id)
-
-        for img in product.images.all():
-            if img.image:
-                img.image.delete(save=False)
-            img.delete()
-
-        product.delete()
-
-    except Product.DoesNotExist:
-        pass
-
-    return redirect('products:show_products')
-
 
 def edit_product(request, product_id):
     try:
@@ -120,3 +106,19 @@ def edit_product(request, product_id):
         form = ProductForm(instance=product)
 
     return render(request, "edit_product.html", {"form": form, "product": product})
+
+def delete_product(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+
+    if request.method == "POST":
+        # Видаляємо всі фото з диску
+        for img in product.images.all():
+            if img.image:
+                img.image.delete(save=False)
+            img.delete()
+
+        product.delete()
+        messages.success(request, "Товар успішно видалено.")
+        return redirect('products:show_products')
+
+    return render(request, "delete_product.html", {"product": product})

@@ -29,3 +29,7 @@ def register(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'register.html', {'form': form})
+
+def get_users(request):
+    users = User.objects.all().values("id", "username", "first_name", "last_name", "email")
+    return JsonResponse(list(users), safe=False)

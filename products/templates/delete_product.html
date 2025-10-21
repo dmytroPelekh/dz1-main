@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Підтвердження видалення</h2>
+
+    <div class="alert alert-warning text-center">
+        <p>Ви справді хочете видалити товар <strong>{{ product.name }}</strong>?</p>
+    </div>
+
+    <form method="POST" class="text-center">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Так, видалити</button>
+        <a href="{% url 'products:show_products' %}" class="btn btn-secondary">Скасувати</a>
+    </form>
+</div>
+{% endblock %}

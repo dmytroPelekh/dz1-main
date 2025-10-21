@@ -38,6 +38,11 @@
             <div class="d-flex flex-row">
                 <button type="submit" class="btn btn-success mt-3">Зберегти зміни</button>
             </div>
+            <a href="{% url 'products:delete_product' product.id %}" 
+            class="btn btn-danger mt-3 ms-2">
+                Видалити товар
+            </a>
+
         </form>
     </div>
 </div>
